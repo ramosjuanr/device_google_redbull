@@ -20,6 +20,8 @@ include build/make/target/board/BoardConfigPixelCommon.mk
 TARGET_BOARD_PLATFORM := lito
 USES_DEVICE_GOOGLE_REDBULL := true
 
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
@@ -93,6 +95,11 @@ endif
 ifneq ($(PRODUCT_BUILD_VBMETA_IMAGE),false)
 AB_OTA_PARTITIONS += vbmeta
 endif
+
+AB_OTA_PARTITIONS += \
+    vendor
+    
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 
 # Partitions (listed in the file) to be wiped under recovery.
 TARGET_RECOVERY_WIPE := device/google/redbull/recovery.wipe
